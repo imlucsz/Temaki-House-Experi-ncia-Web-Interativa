@@ -1,0 +1,920 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf8" />
+    <meta
+      name="viewport"
+      content="width=device-width,initial-scale=1,viewport-fit=cover"
+    />
+    <link rel="stylesheet" href="assets/css/base.css" />
+    <title>Temaki House Corte</title>
+    <meta name="claude:viewport-fit-sides" content="cover" />
+    <meta name="robots" content="noindex,nofollow" />
+    <meta
+      name="description"
+      content="Proposta de site para a Temaki House: abertura com a logo cortada ao meio pela faca, cardápio, montagem do temaki em 3D e pedido pelo WhatsApp."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;700;800&family=Yuji+Boku&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap"
+    />
+    <link rel="stylesheet" href="assets/css/styles.css" />
+    <script src="assets/js/init.js"></script>
+  </head>
+  <body>
+    <a class="skipl" href="#conteudo">Pular para o conteúdo</a>
+
+    <svg
+      width="0"
+      height="0"
+      aria-hidden="true"
+      focusable="false"
+      class="svg-definitions"
+    >
+      <defs>
+        <filter
+          id="liquid"
+          x="-5%"
+          y="-20%"
+          width="110%"
+          height="140%"
+          color-interpolation-filters="sRGB"
+        >
+          <feTurbulence
+            id="liqT"
+            type="fractalNoise"
+            baseFrequency="0.012 0.03"
+            numOctaves="2"
+            seed="3"
+            result="n"
+          />
+          <feDisplacementMap
+            id="liqD"
+            in="SourceGraphic"
+            in2="n"
+            scale="0"
+            xChannelSelector="R"
+            yChannelSelector="G"
+          />
+        </filter>
+        <linearGradient id="steel" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0" stop-color="#5d6269" />
+          <stop offset=".26" stop-color="#e9edf0" />
+          <stop offset=".5" stop-color="#a7aeb5" />
+          <stop offset=".76" stop-color="#f8fafb" />
+          <stop offset="1" stop-color="#6f757c" />
+        </linearGradient>
+        <linearGradient id="wood" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0" stop-color="#1b100c" />
+          <stop offset=".38" stop-color="#4a3226" />
+          <stop offset=".7" stop-color="#2b1b14" />
+          <stop offset="1" stop-color="#120a07" />
+        </linearGradient>
+        <linearGradient id="streak" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#FFF3CF" stop-opacity="0" />
+          <stop offset="1" stop-color="#FFF3CF" stop-opacity=".55" />
+        </linearGradient>
+      </defs>
+    </svg>
+
+    <!-- ABERTURA: logo, corte da faca e portas que abrem o site -->
+    <div class="intro" id="intro" aria-label="Abertura animada da Temaki House">
+      <div class="door dl" aria-hidden="true">
+        <div class="lg">
+          <div class="lock">
+            <span class="hk jp">家</span><span class="wm">Temaki House</span
+            ><i class="hl"></i
+            ><span class="sl jp">手巻き寿司<em>TEMAKIS &amp; HOTS</em></span>
+          </div>
+        </div>
+      </div>
+      <div class="door dr" aria-hidden="true">
+        <div class="lg">
+          <div class="lock">
+            <span class="hk jp">家</span><span class="wm">Temaki House</span
+            ><i class="hl"></i
+            ><span class="sl jp">手巻き寿司<em>TEMAKIS &amp; HOTS</em></span>
+          </div>
+        </div>
+      </div>
+      <div class="slash" aria-hidden="true"></div>
+      <svg
+        class="knife"
+        id="knife"
+        viewBox="0 0 96 800"
+        aria-hidden="true"
+        focusable="false"
+      >
+        <rect x="30" y="-440" width="36" height="690" fill="url(#streak)" />
+        <path d="M35 4h26l-2 206H37Z" fill="url(#wood)" />
+        <path d="M42 14h3l-.8 190h-2Z" fill="rgba(255,255,255,.09)" />
+        <circle cx="48" cy="60" r="2.8" fill="#D8C08A" />
+        <circle cx="48" cy="126" r="2.8" fill="#D8C08A" />
+        <circle cx="48" cy="186" r="2.8" fill="#D8C08A" />
+        <rect x="31" y="208" width="34" height="16" rx="2.5" fill="#D8C08A" />
+        <rect x="33" y="224" width="30" height="16" fill="#6b7077" />
+        <path
+          d="M6 240h84v290C90 650 72 750 48 800 26 748 6 650 6 540Z"
+          fill="url(#steel)"
+        />
+        <path
+          d="M70 240h20v290C90 650 72 750 48 800 60 730 70 640 70 530Z"
+          fill="rgba(255,255,255,.5)"
+        />
+        <path d="M30 262v250" stroke="rgba(40,46,52,.32)" stroke-width="2" />
+        <path d="M6 240h84" stroke="rgba(255,255,255,.75)" stroke-width="1.2" />
+      </svg>
+      <canvas id="introFx" aria-hidden="true"></canvas>
+      <div class="flash" aria-hidden="true"></div>
+      <p class="sr" role="status">
+        Abertura animada: a logo da Temaki House é cortada ao meio por uma faca
+        e as duas metades se abrem, revelando o site.
+      </p>
+      <button class="intro-skip" id="introSkip" type="button">
+        Pular abertura
+      </button>
+    </div>
+
+    <div class="prog" aria-hidden="true"><i id="progI"></i></div>
+    <div id="toast" role="status" aria-live="polite"></div>
+
+    <header class="hdr" id="hdr">
+      <div class="wrap hdr-in">
+        <a class="brand" href="#topo" aria-label="Temaki House, voltar ao topo"
+          ><span class="hanko jp" aria-hidden="true">家</span
+          ><span>Temaki House</span></a
+        >
+        <nav class="nav" aria-label="Seções da página">
+          <a href="#cardapio">Cardápio</a>
+          <a href="#pratos">Pratos</a>
+          <a href="#combos">Combos</a>
+          <a href="#contato">Horários</a>
+        </nav>
+        <div class="hdr-act">
+          <a
+            class="btn sm"
+            href="https://wa.me/5511939303138?text=Ol%C3%A1%2C%20Temaki%20House%21%20Quero%20fazer%20um%20pedido."
+            target="_blank"
+            rel="noopener"
+            >Pedir</a
+          >
+          <button
+            class="ibtn"
+            id="themeBtn"
+            type="button"
+            aria-label="Alternar tema claro e escuro"
+          >
+            <span aria-hidden="true" id="themeIco">☾</span>
+          </button>
+          <button
+            class="mode"
+            id="modeBtn"
+            type="button"
+            aria-pressed="false"
+            aria-label="Alternar entre modo completo e modo leve"
+          >
+            <span>Modo </span><b id="modeLbl">Completo</b>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <main id="conteudo">
+      <!-- HERO -->
+      <section class="hero" id="topo" aria-labelledby="h1">
+        <div class="enso" aria-hidden="true">
+          <svg viewBox="0 0 400 400">
+            <defs>
+              <mask
+                id="ensoM"
+                maskUnits="userSpaceOnUse"
+                x="-40"
+                y="-40"
+                width="480"
+                height="480"
+              >
+                <path
+                  id="ensoArc"
+                  fill="none"
+                  stroke="#fff"
+                  stroke-width="110"
+                />
+              </mask>
+            </defs>
+            <circle class="disc" cx="200" cy="200" r="148" />
+            <path id="ensoBrush" class="brush" mask="url(#ensoM)" />
+          </svg>
+        </div>
+        <div class="wrap hero-in">
+          <div class="hero-grid">
+            <div class="hero-copy">
+              <span class="kanji jp" aria-hidden="true">手巻き寿司</span>
+              <div class="hero-rv" data-reveal>
+                <p class="tag fade eyebrow reveal-delay-005">
+                  Temakis e hots · Poá, SP
+                </p>
+                <h1 id="h1">
+                  <span class="ln reveal-delay-010"><span>Temaki</span></span
+                  ><span class="ln reveal-delay-022"><span>House</span></span>
+                </h1>
+                <p class="lead fade reveal-delay-050">
+                  Temakis e hots feitos na hora, entregues em até 5 km da loja.
+                </p>
+                <div class="cta-row fade reveal-delay-065">
+                  <a
+                    class="btn"
+                    href="https://wa.me/5511939303138?text=Ol%C3%A1%2C%20Temaki%20House%21%20Quero%20fazer%20um%20pedido."
+                    target="_blank"
+                    rel="noopener"
+                    >Pedir no WhatsApp</a
+                  >
+                  <a class="btn ghost" href="#cardapio">Ver cardápio</a>
+                </div>
+                <p class="open fade reveal-delay-080" id="open">
+                  Aberto das 18h às 23h, de segunda a sábado
+                </p>
+              </div>
+            </div>
+            <div class="arch-wrap hero-rv" data-reveal>
+              <div class="rise reveal-delay-030">
+                <figure class="arch">
+                  <div
+                    class="ph p3"
+                    role="img"
+                    aria-label="Dois temakis de salmão e hot rolls em um prato branco"
+                  ></div>
+                  <figcaption>Combo Casal: 2 temakis e 16 hots</figcaption>
+                </figure>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="hint" aria-hidden="true"><span>Role</span><i></i></div>
+      </section>
+
+      <!-- CARDÁPIO -->
+      <section id="cardapio" class="wrap" aria-labelledby="cd-t">
+        <h2 class="sec" id="cd-t" data-reveal>
+          <span class="jp">お品書き</span
+          ><span class="ln"><span>Cardápio</span></span>
+        </h2>
+        <div class="menu">
+          <div>
+            <h3>Temakis</h3>
+            <ul>
+              <li>
+                <div class="row">
+                  <span class="nm">Temaki Salmão Clássico</span
+                  ><i class="dots"></i><span class="pr">R$ 29,90</span>
+                </div>
+                <p class="ds">
+                  Salmão fresco picado, cebolinha e pimenta-do-reino.
+                </p>
+                <a
+                  class="ped"
+                  href="https://wa.me/5511939303138?text=Ol%C3%A1%2C%20Temaki%20House%21%20Quero%20pedir%3A%20Temaki%20Salm%C3%A3o%20Cl%C3%A1ssico%20%28R%24%2029%2C90%29."
+                  target="_blank"
+                  rel="noopener"
+                  >Pedir este item</a
+                >
+              </li>
+              <li>
+                <div class="row">
+                  <span class="nm">Temaki Salmão Grelhado</span
+                  ><i class="dots"></i><span class="pr">R$ 27,90</span>
+                </div>
+                <p class="ds">
+                  Salmão grelhado desfiado com cream cheese e cebolinha.
+                </p>
+                <a
+                  class="ped"
+                  href="https://wa.me/5511939303138?text=Ol%C3%A1%2C%20Temaki%20House%21%20Quero%20pedir%3A%20Temaki%20Salm%C3%A3o%20Grelhado%20%28R%24%2027%2C90%29."
+                  target="_blank"
+                  rel="noopener"
+                  >Pedir este item</a
+                >
+              </li>
+              <li>
+                <div class="row">
+                  <span class="nm">Temaki Especial com Tarê</span
+                  ><i class="dots"></i><span class="pr">R$ 32,90</span>
+                </div>
+                <p class="ds">
+                  Salmão picado, cream cheese, cebolinha e molho tarê.
+                </p>
+                <a
+                  class="ped"
+                  href="https://wa.me/5511939303138?text=Ol%C3%A1%2C%20Temaki%20House%21%20Quero%20pedir%3A%20Temaki%20Especial%20com%20Tar%C3%AA%20%28R%24%2032%2C90%29."
+                  target="_blank"
+                  rel="noopener"
+                  >Pedir este item</a
+                >
+              </li>
+            </ul>
+          </div>
+          <div>
+            <h3>Hots</h3>
+            <ul>
+              <li>
+                <div class="row">
+                  <span class="nm">Hot Roll de Salmão (8 un.)</span
+                  ><i class="dots"></i><span class="pr">R$ 32,90</span>
+                </div>
+                <p class="ds">
+                  Empanado e crocante, com cream cheese e cebolinha.
+                </p>
+                <a
+                  class="ped"
+                  href="https://wa.me/5511939303138?text=Ol%C3%A1%2C%20Temaki%20House%21%20Quero%20pedir%3A%20Hot%20Roll%20de%20Salm%C3%A3o%2C%208%20un.%20%28R%24%2032%2C90%29."
+                  target="_blank"
+                  rel="noopener"
+                  >Pedir este item</a
+                >
+              </li>
+              <li>
+                <div class="row">
+                  <span class="nm">Hot Roll Especial (8 un.)</span
+                  ><i class="dots"></i><span class="pr">R$ 36,90</span>
+                </div>
+                <p class="ds">Cobertura cremosa e cebolinha fresca.</p>
+                <a
+                  class="ped"
+                  href="https://wa.me/5511939303138?text=Ol%C3%A1%2C%20Temaki%20House%21%20Quero%20pedir%3A%20Hot%20Roll%20Especial%2C%208%20un.%20%28R%24%2036%2C90%29."
+                  target="_blank"
+                  rel="noopener"
+                  >Pedir este item</a
+                >
+              </li>
+              <li>
+                <div class="row">
+                  <span class="nm">Crocante de Salmão (2 un.)</span
+                  ><i class="dots"></i><span class="pr">R$ 24,90</span>
+                </div>
+                <p class="ds">
+                  Rolo frito recheado de salmão, com cream cheese por cima.
+                </p>
+                <a
+                  class="ped"
+                  href="https://wa.me/5511939303138?text=Ol%C3%A1%2C%20Temaki%20House%21%20Quero%20pedir%3A%20Crocante%20de%20Salm%C3%A3o%2C%202%20un.%20%28R%24%2024%2C90%29."
+                  target="_blank"
+                  rel="noopener"
+                  >Pedir este item</a
+                >
+              </li>
+            </ul>
+          </div>
+          <div>
+            <h3>Combos</h3>
+            <ul>
+              <li>
+                <div class="row">
+                  <span class="nm">Combo Temaki + Hot</span><i class="dots"></i
+                  ><span class="pr">R$ 54,90</span>
+                </div>
+                <p class="ds">1 temaki à escolha e 8 hots.</p>
+                <a
+                  class="ped"
+                  href="https://wa.me/5511939303138?text=Ol%C3%A1%2C%20Temaki%20House%21%20Quero%20pedir%3A%20Combo%20Temaki%20%2B%20Hot%20%28R%24%2054%2C90%29."
+                  target="_blank"
+                  rel="noopener"
+                  >Pedir este item</a
+                >
+              </li>
+              <li>
+                <div class="row">
+                  <span class="nm">Combo Casal</span><i class="dots"></i
+                  ><span class="pr">R$ 99,90</span>
+                </div>
+                <p class="ds">2 temakis à escolha e 16 hots.</p>
+                <a
+                  class="ped"
+                  href="https://wa.me/5511939303138?text=Ol%C3%A1%2C%20Temaki%20House%21%20Quero%20pedir%3A%20Combo%20Casal%20%28R%24%2099%2C90%29."
+                  target="_blank"
+                  rel="noopener"
+                  >Pedir este item</a
+                >
+              </li>
+            </ul>
+          </div>
+        </div>
+        <p class="fine">Cardápio e preços ilustrativos, para demonstração.</p>
+      </section>
+
+      <!-- FAIXA -->
+      <div class="band" aria-hidden="true">
+        <div class="band-in" id="band">
+          <div class="band-g">
+            <span class="k">手巻き寿司</span><span>TEMAKI</span
+            ><span>HOT ROLL</span><span class="k">寿司</span
+            ><span>CROCANTE</span><span class="k">鮭</span><span>TEMAKI</span
+            ><span>FEITO NA HORA</span>
+          </div>
+          <div class="band-g">
+            <span class="k">手巻き寿司</span><span>TEMAKI</span
+            ><span>HOT ROLL</span><span class="k">寿司</span
+            ><span>CROCANTE</span><span class="k">鮭</span><span>TEMAKI</span
+            ><span>FEITO NA HORA</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- MONTAGEM (partículas em WebGL presas à rolagem) -->
+      <section
+        class="pin chap"
+        id="montagem"
+        aria-label="Capítulo animado: como nasce um temaki"
+      >
+        <div class="stick">
+          <div class="ember" aria-hidden="true"></div>
+          <canvas id="gl" aria-hidden="true"></canvas>
+          <div class="scrim" aria-hidden="true"></div>
+          <div class="wrap chap-in">
+            <p class="sr">
+              Capítulo animado em cinco passos: arroz, alga, recheio, cone e
+              entrega. Para ler em sequência, use o Modo Leve.
+            </p>
+            <div class="steps">
+              <article class="st">
+                <span class="num jp" aria-hidden="true">手巻</span>
+                <span class="tag">Passo a passo</span>
+                <h2>Como nasce um temaki.</h2>
+                <p class="lead">
+                  Do arroz ao cone, em cinco gestos. Role a página para montar o
+                  seu.
+                </p>
+              </article>
+              <article class="st">
+                <svg class="ico" viewBox="0 0 64 64" aria-hidden="true">
+                  <path d="M8 38h48c0 12-10 20-24 20S8 50 8 38Z" />
+                  <path d="M14 38c0-12 8-20 18-20s18 8 18 20" />
+                </svg>
+                <span class="num jp" aria-hidden="true">米</span>
+                <span class="tag">01 · Arroz</span>
+                <h2>Arroz de sushi, no ponto.</h2>
+                <p class="lead">
+                  Grãos soltos e levemente temperados, a base de todo temaki.
+                </p>
+              </article>
+              <article class="st">
+                <svg class="ico" viewBox="0 0 64 64" aria-hidden="true">
+                  <rect x="10" y="14" width="44" height="36" rx="3" />
+                  <path d="M10 24h44M10 32h44M10 40h44" />
+                </svg>
+                <span class="num jp" aria-hidden="true">海苔</span>
+                <span class="tag">02 · Alga</span>
+                <h2>Nori seco e crocante.</h2>
+                <p class="lead">
+                  A folha de alga recebe o arroz na hora, para não perder a
+                  crocância.
+                </p>
+              </article>
+              <article class="st">
+                <svg class="ico" viewBox="0 0 64 64" aria-hidden="true">
+                  <path d="M8 32c8-14 30-18 48 0-18 18-40 14-48 0Z" />
+                  <path
+                    d="M22 27c4 4 4 9 0 13M32 24c4 6 4 13 0 17M42 27c4 4 4 9 0 13"
+                  />
+                </svg>
+                <span class="num jp" aria-hidden="true">鮭</span>
+                <span class="tag">03 · Recheio</span>
+                <h2>Salmão, cream cheese e cebolinha.</h2>
+                <p class="lead">
+                  O recheio entra por cima do arroz. No cardápio, cada temaki
+                  tem a sua receita.
+                </p>
+              </article>
+              <article class="st">
+                <svg class="ico" viewBox="0 0 64 64" aria-hidden="true">
+                  <path d="M10 56 30 12c10 2 22 10 28 22Z" />
+                  <path d="M30 12c4 12 14 20 28 22" />
+                </svg>
+                <span class="num jp" aria-hidden="true">巻</span>
+                <span class="tag">04 · Cone</span>
+                <h2>Enrolado na hora.</h2>
+                <p class="lead">
+                  O cone só é fechado depois do pedido, para chegar crocante.
+                </p>
+              </article>
+              <article class="st">
+                <svg class="ico" viewBox="0 0 64 64" aria-hidden="true">
+                  <path
+                    d="M32 58C20 42 16 34 16 26a16 16 0 0 1 32 0c0 8-4 16-16 32Z"
+                  />
+                  <circle cx="32" cy="26" r="6" />
+                </svg>
+                <span class="num jp" aria-hidden="true">届</span>
+                <span class="tag">05 · Entrega</span>
+                <h2>Até a sua porta.</h2>
+                <p class="lead">
+                  Entregamos em até 5 km da loja. Peça pelo WhatsApp e consulte
+                  a taxa.
+                </p>
+                <a
+                  class="btn sm order-spacing"
+                  href="https://wa.me/5511939303138?text=Ol%C3%A1%2C%20Temaki%20House%21%20Quero%20fazer%20um%20pedido."
+                  target="_blank"
+                  rel="noopener"
+                  >Pedir agora</a
+                >
+              </article>
+            </div>
+          </div>
+          <div class="rail" aria-hidden="true">
+            <i></i><i></i><i></i><i></i><i></i><i></i>
+          </div>
+        </div>
+      </section>
+
+      <!-- PRATOS EM DIAGONAL -->
+      <section
+        class="pin diag"
+        id="pratos"
+        aria-label="Pratos da casa, em rolagem diagonal"
+      >
+        <div class="stick">
+          <span class="kbig jp" aria-hidden="true">味</span>
+          <div class="diag-head wrap">
+            <span class="tag">Os pratos da casa</span>
+            <h2>O que sai da chapa.</h2>
+            <p class="lead">
+              Toque em uma foto para ampliar. Cada prato tem o botão de pedido.
+            </p>
+          </div>
+          <div class="track" id="track">
+            <article class="dish">
+              <button
+                class="shot"
+                type="button"
+                data-p="p2"
+                data-alt="Temaki de salmão com molho tarê"
+              >
+                <span class="ph p2"></span>
+              </button>
+              <h3>Temaki Especial com Tarê</h3>
+              <p class="pr">R$ 32,90</p>
+              <a
+                class="ped"
+                href="https://wa.me/5511939303138?text=Ol%C3%A1%2C%20Temaki%20House%21%20Quero%20pedir%3A%20Temaki%20Especial%20com%20Tar%C3%AA%20%28R%24%2032%2C90%29."
+                target="_blank"
+                rel="noopener"
+                >Pedir este item</a
+              >
+            </article>
+            <article class="dish">
+              <button
+                class="shot"
+                type="button"
+                data-p="p1"
+                data-alt="Hot rolls e temaki de salmão"
+              >
+                <span class="ph p1"></span>
+              </button>
+              <h3>Combo Temaki + Hot</h3>
+              <p class="pr">R$ 54,90</p>
+              <a
+                class="ped"
+                href="https://wa.me/5511939303138?text=Ol%C3%A1%2C%20Temaki%20House%21%20Quero%20pedir%3A%20Combo%20Temaki%20%2B%20Hot%20%28R%24%2054%2C90%29."
+                target="_blank"
+                rel="noopener"
+                >Pedir este item</a
+              >
+            </article>
+            <article class="dish">
+              <button
+                class="shot"
+                type="button"
+                data-p="p3"
+                data-alt="Temakis e hot rolls no prato"
+              >
+                <span class="ph p3"></span>
+              </button>
+              <h3>Combo Casal</h3>
+              <p class="pr">R$ 99,90</p>
+              <a
+                class="ped"
+                href="https://wa.me/5511939303138?text=Ol%C3%A1%2C%20Temaki%20House%21%20Quero%20pedir%3A%20Combo%20Casal%20%28R%24%2099%2C90%29."
+                target="_blank"
+                rel="noopener"
+                >Pedir este item</a
+              >
+            </article>
+            <article class="dish">
+              <button
+                class="shot"
+                type="button"
+                data-p="p4"
+                data-alt="Rolos crocantes de salmão com cream cheese"
+              >
+                <span class="ph p4"></span>
+              </button>
+              <h3>Crocante de Salmão</h3>
+              <p class="pr">R$ 24,90</p>
+              <a
+                class="ped"
+                href="https://wa.me/5511939303138?text=Ol%C3%A1%2C%20Temaki%20House%21%20Quero%20pedir%3A%20Crocante%20de%20Salm%C3%A3o%2C%202%20un.%20%28R%24%2024%2C90%29."
+                target="_blank"
+                rel="noopener"
+                >Pedir este item</a
+              >
+            </article>
+            <article class="dish end">
+              <div>
+                <b>Tem mais.</b
+                ><a class="btn sm" href="#cardapio">Ver o cardápio</a>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- DIRETO DA CHAPA (quadro que cresce com a rolagem) -->
+      <section class="pin expd" id="chapa" aria-label="Direto da chapa">
+        <div class="stick">
+          <div class="vframe" id="vframe">
+            <canvas
+              id="chefCv"
+              role="img"
+              aria-label="Ilustração animada de um chef preparando pratos na chapa"
+            ></canvas>
+            <div class="vshade" aria-hidden="true"></div>
+          </div>
+          <div class="expd-copy wrap" id="expCopy">
+            <span class="tag">Direto da chapa</span>
+            <h2>Feito na hora, na sua frente.</h2>
+            <p class="lead">Role para abrir a cozinha em tela cheia.</p>
+          </div>
+          <p class="vnote">
+            Ilustração animada · o vídeo real da loja entra aqui
+          </p>
+        </div>
+      </section>
+
+      <!-- COMBOS EM VIDRO -->
+      <section class="combos" id="combos" aria-labelledby="cb-t">
+        <div class="cbg ph p1" aria-hidden="true"></div>
+        <div class="wrap" data-reveal>
+          <span class="tag fade">Combos</span>
+          <h2 id="cb-t">
+            <span class="ln"><span>Para dividir, ou não.</span></span>
+          </h2>
+          <p class="lead fade reveal-delay-010">
+            Os combos da casa, em cartões de vidro que acompanham o mouse.
+          </p>
+          <div class="pgrid rise reveal-delay-020">
+            <article class="plan">
+              <h3>Combo Temaki + Hot</h3>
+              <p class="for">1 temaki à escolha e 8 hots.</p>
+              <div class="price"><small>R$</small>54,90</div>
+              <a
+                class="btn sm"
+                href="https://wa.me/5511939303138?text=Ol%C3%A1%2C%20Temaki%20House%21%20Quero%20pedir%3A%20Combo%20Temaki%20%2B%20Hot%20%28R%24%2054%2C90%29."
+                target="_blank"
+                rel="noopener"
+                >Pedir este combo</a
+              >
+            </article>
+            <article class="plan mid">
+              <span class="badge">Para dividir</span>
+              <h3>Combo Casal</h3>
+              <p class="for">2 temakis à escolha e 16 hots.</p>
+              <div class="price"><small>R$</small>99,90</div>
+              <a
+                class="btn sm"
+                href="https://wa.me/5511939303138?text=Ol%C3%A1%2C%20Temaki%20House%21%20Quero%20pedir%3A%20Combo%20Casal%20%28R%24%2099%2C90%29."
+                target="_blank"
+                rel="noopener"
+                >Pedir este combo</a
+              >
+            </article>
+            <article class="plan">
+              <span class="badge">Surpresa da casa</span>
+              <h3>Combo Sakura</h3>
+              <p class="for">2 temakis, 16 hots e 1 crocante.</p>
+              <div class="price"><small>R$</small>119,90</div>
+              <a
+                class="btn sm"
+                href="https://wa.me/5511939303138?text=Ol%C3%A1%2C%20Temaki%20House%21%20Quero%20pedir%3A%20Combo%20Sakura%20%28R%24%20119%2C90%29."
+                target="_blank"
+                rel="noopener"
+                >Pedir este combo</a
+              >
+            </article>
+          </div>
+          <p class="fine fade reveal-delay-030">
+            Combos e preços ilustrativos, para demonstração.
+          </p>
+        </div>
+      </section>
+
+      <!-- NÚMEROS -->
+      <section class="nums" aria-label="A Temaki House em números">
+        <div class="wrap">
+          <div class="cgrid">
+            <div class="cnt">
+              <b data-n="6">6</b><span>dias abertos por semana</span>
+            </div>
+            <div class="cnt">
+              <b data-n="5">5</b><span>km de raio de entrega</span>
+            </div>
+            <div class="cnt">
+              <b data-n="5">5</b><span>horas de atendimento por noite</span>
+            </div>
+            <div class="cnt">
+              <b data-n="8">8</b><span>opções no cardápio</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- AVALIAÇÕES -->
+      <section id="avaliacoes" class="wrap" aria-labelledby="av-t">
+        <div class="dhead">
+          <h2 class="sec section-no-margin" id="av-t">
+            <span class="jp">声</span>Quem pede, gosta
+          </h2>
+          <div class="arrows">
+            <button id="pv" type="button" aria-label="Avaliação anterior">
+              ‹</button
+            ><button id="nx" type="button" aria-label="Próxima avaliação">
+              ›
+            </button>
+          </div>
+        </div>
+        <div
+          class="rail-r"
+          id="rail-r"
+          tabindex="0"
+          aria-label="Avaliações de clientes"
+        >
+          <div class="dep">
+            <p>
+              “Temaki bem recheado e chegou rápido. Já virou o pedido de sexta.”
+            </p>
+            <b>Carla M.</b>
+          </div>
+          <div class="dep">
+            <p>
+              “O hot roll é crocante e vem quentinho. Recomendo o combo casal.”
+            </p>
+            <b>Rafael S.</b>
+          </div>
+          <div class="dep">
+            <p>
+              “Atendimento atencioso pelo WhatsApp e entrega no horário
+              combinado.”
+            </p>
+            <b>Juliana P.</b>
+          </div>
+        </div>
+        <p class="fine">
+          Avaliações de exemplo, para demonstração. Serão trocadas por
+          comentários de clientes reais.
+        </p>
+      </section>
+
+      <!-- COMO PEDIR -->
+      <section class="how" aria-labelledby="co-t">
+        <div class="wrap" data-reveal>
+          <h2 class="sec fade" id="co-t">
+            <span class="jp">ご注文</span>Como pedir
+          </h2>
+          <ol class="steps-o rise">
+            <li>
+              <span class="jp" aria-hidden="true">一</span>
+              <h3>Escolha no cardápio</h3>
+              <p>Veja os temakis, hots e combos.</p>
+            </li>
+            <li>
+              <span class="jp" aria-hidden="true">二</span>
+              <h3>Chame no WhatsApp</h3>
+              <p>Mande o pedido e o seu endereço.</p>
+            </li>
+            <li>
+              <span class="jp" aria-hidden="true">三</span>
+              <h3>Receba em casa</h3>
+              <p>
+                Entregamos em até 5 km da loja. Consulte a taxa pelo WhatsApp.
+              </p>
+            </li>
+          </ol>
+        </div>
+      </section>
+
+      <!-- CHAMADA FINAL -->
+      <section class="cta" id="pedir" aria-labelledby="cta-t">
+        <div class="wrap" data-reveal>
+          <span class="tag fade">注文</span>
+          <h2 class="liquid" id="cta-t">Bateu a fome?</h2>
+          <div class="fade reveal-delay-020">
+            <a
+              class="btn mag"
+              id="mag"
+              href="https://wa.me/5511939303138?text=Ol%C3%A1%2C%20Temaki%20House%21%20Quero%20fazer%20um%20pedido."
+              target="_blank"
+              rel="noopener"
+              ><span>Pedir agora</span></a
+            >
+          </div>
+        </div>
+      </section>
+
+      <!-- HORÁRIOS E ENDEREÇO -->
+      <section
+        id="contato"
+        class="wrap contact-section"
+        aria-label="Horários e endereço"
+      >
+        <div class="cards">
+          <div class="card">
+            <h3><span class="jp">営業時間</span>Horários</h3>
+            <ul class="hrs" id="hrs">
+              <li data-d="1,2,3,4,5,6">
+                <span>Segunda a sábado</span><span>18h às 23h</span>
+              </li>
+              <li data-d="0"><span>Domingo</span><span>Fechado</span></li>
+            </ul>
+            <p class="fine holiday-note">
+              Em feriados, os horários podem ser diferentes.
+            </p>
+          </div>
+          <div class="card">
+            <h3><span class="jp">配達</span>Onde estamos</h3>
+            <p>R. Florianópolis, 526 – Cidade Kemel<br />Poá – SP, 08554-110</p>
+            <p>Entrega em um raio de 5 km da loja.</p>
+            <div class="cta-row">
+              <a
+                class="btn sm"
+                href="https://wa.me/5511939303138?text=Ol%C3%A1%2C%20Temaki%20House%21%20Quero%20fazer%20um%20pedido."
+                target="_blank"
+                rel="noopener"
+                >WhatsApp (11) 93930-3138</a
+              >
+              <a
+                class="btn sm ghost"
+                href="https://www.google.com/maps/search/?api=1&amp;query=R.%20Florian%C3%B3polis%2C%20526%20-%20Cidade%20Kemel%2C%20Po%C3%A1%20-%20SP"
+                target="_blank"
+                rel="noopener"
+                >Ver no mapa</a
+              >
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="ft">
+      <div class="wrap">
+        <span class="demo">Proposta de demonstração · Vitrion Studio</span>
+        <p>Proposta de site criada pela Vitrion Studio para a Temaki House.</p>
+        <p>
+          Cardápio, preços, combos, avaliações e a cena da chapa são
+          ilustrativos. Fotos dos pratos: material de referência, com uso a
+          confirmar com a loja.
+        </p>
+      </div>
+    </footer>
+
+    <dialog class="lb" id="lb" aria-label="Foto ampliada">
+      <button class="lbx" id="lbx" type="button" aria-label="Fechar">×</button>
+      <div class="lbimg"><div class="ph" id="lbph"></div></div>
+      <div class="lbbar">
+        <button id="lbp" type="button" aria-label="Foto anterior">‹</button>
+        <p id="lbc"></p>
+        <button id="lbn" type="button" aria-label="Próxima foto">›</button>
+      </div>
+    </dialog>
+
+    <a
+      class="fab"
+      href="https://wa.me/5511939303138?text=Ol%C3%A1%2C%20Temaki%20House%21%20Quero%20fazer%20um%20pedido."
+      target="_blank"
+      rel="noopener"
+      aria-label="Pedir pelo WhatsApp"
+      >Pedir no WhatsApp</a
+    >
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Restaurant",
+        "name": "Temaki House",
+        "servesCuisine": "Japonesa",
+        "telephone": "+5511939303138",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "R. Florianópolis, 526 - Cidade Kemel",
+          "addressLocality": "Poá",
+          "addressRegion": "SP",
+          "postalCode": "08554-110",
+          "addressCountry": "BR"
+        },
+        "openingHours": ["Mo-Sa 18:00-23:00"],
+        "areaServed": "Raio de 5 km da loja"
+      }
+    </script>
+
+    <script src="assets/js/main.js"></script>
+  </body>
+</html>
